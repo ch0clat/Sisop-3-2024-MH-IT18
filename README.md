@@ -8,6 +8,74 @@
 # Soal
 ## Soal 1
 
+Pada zaman dahulu pada galaksi yang jauh-jauh sekali, hiduplah seorang Stelle. Stelle adalah seseorang yang sangat tertarik dengan Tempat Sampah dan Parkiran Luar Angkasa. Stelle memulai untuk mencari Tempat Sampah dan Parkiran yang terbaik di angkasa. Dia memerlukan program untuk bisa secara otomatis mengetahui Tempat Sampah dan Parkiran dengan rating terbaik di angkasa. Programnya berbentuk microservice sebagai berikut:
+Dalam auth.c pastikan file yang masuk ke folder new-entry adalah file csv dan berakhiran  trashcan dan parkinglot. Jika bukan, program akan secara langsung akan delete file tersebut. 
+Contoh dari nama file yang akan diautentikasi:
+belobog_trashcan.csv
+osaka_parkinglot.csv
+Format data (Kolom)  yang berada dalam file csv adalah seperti berikut:
+
+![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/89a776b1-4bd6-4874-90bb-cae686da57e0)
+
+atau
+
+![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/b258017e-5030-4b89-91b7-b4d9b053b1c8)
+
+
+File csv yang lolos tahap autentikasi akan dikirim ke shared memory. 
+Dalam rate.c, proses akan mengambil data csv dari shared memory dan akan memberikan output Tempat Sampah dan Parkiran dengan Rating Terbaik dari data tersebut.
+
+![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/f6c2183a-1ccd-4fe0-aa35-91da6c2a6814)
+
+
+Pada db.c, proses bisa memindahkan file dari new-data ke folder microservices/database, WAJIB MENGGUNAKAN SHARED MEMORY.
+Log semua file yang masuk ke folder microservices/database ke dalam file db.log dengan contoh format sebagai berikut:
+[DD/MM/YY hh:mm:ss] [type] [filename]
+ex : `[07/04/2024 08:34:50] [Trash Can] [belobog_trashcan.csv]
+
+Contoh direktori awal:
+.
+├── auth.c
+
+├── microservices
+
+│   ├── database
+
+│   │   └── db.log
+
+│   ├── db.c
+
+│   └── rate.c
+
+└── new-data
+
+    ├── belobog_trashcan.csv
+    
+    ├── ikn.csv
+    
+    └── osaka_parkinglot.csv
+
+Contoh direktori akhir setelah dijalankan auth.c dan db.c:
+.
+├── auth.c
+
+├── microservices
+
+│   ├── database
+
+│   │   ├── belobog_trashcan.csv
+
+│   │   ├── db.log
+
+│   │   └── osaka_parkinglot.csv
+
+│   ├── db.c
+
+│   └── rate.c
+
+└── new-data
+
+
 ## Soal 2
 Max Verstappen 🏎️ seorang pembalap F1 dan programer memiliki seorang adik bernama Min Verstappen (masih SD) sedang menghadapi tahap paling kelam dalam kehidupan yaitu perkalian matematika, Min meminta bantuan Max untuk membuat kalkulator perkalian sederhana (satu sampai sembilan). Sembari Max nguli dia menyuruh Min untuk belajar perkalian dari web (referensi) agar tidak bergantung pada kalkulator.
 (Wajib menerapkan konsep pipes dan fork seperti yang dijelaskan di modul Sisop. Gunakan 2 pipes dengan diagram seperti di modul 3).
