@@ -124,7 +124,7 @@ Log Perubahan:
 ## soal 2
 Kita masukkan beberapa header sebagai library yang dipakai. Untuk penjelasan kegunaan tiap library, ada pada komentar.
 
-```sh
+```c
 #include <stdio.h> // Input-Output standar
 #include <string.h> // Manipulasi string
 #include <math.h> // Fungsi matematika
@@ -136,14 +136,14 @@ Kita masukkan beberapa header sebagai library yang dipakai. Untuk penjelasan keg
 
 Selanjutnya, kita buat Array 'Kata', yang digunakan untuk menyimpan representasi string angka dari 0 hingga 9 dalam bahasa Indonesia.
 
-```sh
+```c
 // Deklarasi angka2 di Array 
 char Kata[10][10] = {"nol", "satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan"}; // Data2nya (nol sampai sembilan)
 ```
 
 Setelah kita deklarasi Array 'Kata', kita deklarasi variabel-variabel lainnya. Variabel yang dideklarasikan mencakup: variabel untuk menyimpan hasil operasi matematika, file descriptor untuk pipe, process id untuk child process, dan buffer untuk menyimpan data yang dikirim melalui pipe.
 
-```sh
+```c
 int hasil;
 char hasilchar[10];
 
@@ -157,7 +157,7 @@ char hasilchar[10];
 
 Selesai mendeklarasikan variabel, kita gunakan fungsi Cari Angka, yang akan mencari angka dalam array Kata berdasarkan input yang diberikan. Jika angka ditemukan, fungsi akan mengembalikan indeksnya dalam array Kata.
 
-```sh
+```c
 // Mencari angka dari array "Kata"
 int CariAngka(const char * KataYangDicari){
         for (int i = 0; i < 10; i++){
@@ -171,7 +171,7 @@ int CariAngka(const char * KataYangDicari){
 
 Dibawah ini adalah fungsi-fungsi operasi matematika, yaitu Perkalian, Penjumlahan, Pembagian dan Pengurangan.
 
-```sh
+```c
   //==========================================//
  // FUNGSI OPERASI KALI BAGI TAMBAH KURANG   //
 //==========================================//
@@ -199,7 +199,7 @@ int pengurangan(int AngkaPertama, int AngkaKedua){  // Fungsi PENGURANGAN
 ```
 Nah, fungsi dibawah ini akan meng-convert hasil operasi matematika tadi menjadi string bahasa Indonesia. Misal program mendapat "21", angka tersebut akan menjadi "dua puluh satu". 
 
-```sh
+```s
 // Dari hasil angka (misal 21) menjadi dua puluh satu
 char* NumberToBahasa(char FinalOutput[], char StrOp[], char KataPertama[], char KataKedua[]){
         char ch1[50];
@@ -328,7 +328,7 @@ char* NumberToBahasa(char FinalOutput[], char StrOp[], char KataPertama[], char 
 
 Fungsi selanjutnya, ValidasiOutput, akanmemvalidasi hasil operasi matematika. Jika hasilnya non-negatif, hasil tersebut dikonversi menjadi string. Jika hasilnya negatif, string "ERROR" akan dikembalikan.
 
-```sh
+```c
 // Misal hasilnya malah negatif (error)
 char* ValidasiOutput(int hasil){
         if (hasil >= 0){
@@ -343,7 +343,7 @@ char* ValidasiOutput(int hasil){
     }
 ```
 Fungsi selanjutnya adalah fungsi main dalam program Di sini dilakukan proses input dari pengguna, pembuatan pipe, pembuatan child process, pengiriman data melalui pipe, penanganan operasi matematika, pembuatan log, dan lain-lain.
-```sh
+```c
 int main(int argc, char* argv[])
 {
     char KataPertama[50], KataKedua[50], FinalOutput[10];
@@ -357,7 +357,7 @@ Fungsi dibawah ini berjalan dengan alur sebagai berikut (lanjut dari fungsi main
    `Child` menerima inputan, melakukan operasi matematika, mengonversi hasilnya ke bahasa Indonesia, dan mengirim hasil tersebut serta waktu ke parent melalui pipe.
    `Parent` menerima hasil dari child, menuliskannya ke dalam file histori.log, dan menunggu child selesai.
 
-```sh
+```c
     // printf("arg = %s", argv[1]);
 
     //=================================================================================//
@@ -486,7 +486,7 @@ Fungsi dibawah ini berjalan dengan alur sebagai berikut (lanjut dari fungsi main
         printf("\nreceive: %s\n", buffer4);
 ```
 Terakhir, kita masukkan hasil pada histori.log
-```sh
+```c
          //==================//
         //   L O G G I N G  //  
        //==================//
@@ -516,5 +516,644 @@ Dan ini adalah hasil didalam log-nya:
 
    
 ## Soal 3
+**actions.c**
+```c
+#include <stdio.h>
+#include <string.h>
+#include "action.h"
+
+char* handle_gap(float distance) {
+    if (distance < 3.5) {
+        return "Gogogo";
+    } else if (distance >= 3.5 && distance <= 10) {
+        return "Push";
+    } else if (distance > 10){
+        return "Stay out of trouble";
+    } else {
+        return "Invalid info";
+    }
+}
+
+char* handle_fuel(float fuel_percent) {
+    if (fuel_percent > 80) {
+        return "Push Push Push";
+    } else if (fuel_percent >= 50 && fuel_percent <= 80) {
+        return "You can go";
+    } else if (fuel_percent < 50){
+        return "Conserve Fuel";
+    } else {
+        return "Invalid info";
+    }
+}
+
+char* handle_tire(int tire_wear) {
+    if (tire_wear > 80) {
+        return "Go Push Go Push";
+    } else if (tire_wear >= 50 && tire_wear <= 80) {
+        return "Good Tire Wear";
+    } else if (tire_wear >= 30 && tire_wear < 50) {
+        return "Conserve Your Tire";
+    } else if (tire_wear < 30){
+        return "Box Box Box";
+    } else {
+        return "Invalid info";
+    }
+}
+
+char* handle_tire_change(char* current_tire) {
+    if (strcmp(current_tire, "Soft") == 0) {
+        return "Mediums Ready";
+    } else if (strcmp(current_tire, "Medium") == 0) {
+        return "Box for Softs";
+    } else {
+        return "Invalid tire type";
+    }
+}
+```
+
+actions.c berisi function yang bisa di panggil oleh paddock.c. `#include "action.h"` digunakan sebagai header file agar paddock dapat memanggil function pada action.c.
+<ul>
+<li> `handle_gap` akan di panggil jika driver menggunakan command `Gap`
+<li> `handle_fuel` akan di panggil jika driver menggunakan command `Fuel`
+<li> `handle_tire` akan di panggil jika driver menggunakan command `Tire`
+<li> `handle_tire_change` akan di panggil jika driver menggunakan command `TireChange`
+</ul>
+
+
+**driver.c **
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <time.h>
+
+#define PORT 8080
+#define MAX_LEN 20
+
+
+int establish_connection() {
+    int sock = 0;
+    struct sockaddr_in serv_addr;
+
+    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        perror("Socket creation error");
+        exit(EXIT_FAILURE);
+    }
+
+    memset(&serv_addr, '0', sizeof(serv_addr));
+
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_port = htons(PORT);
+
+    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
+        perror("Invalid address/Address not supported");
+        exit(EXIT_FAILURE);
+    }
+
+    if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
+        perror("Connection failed");
+        exit(EXIT_FAILURE);
+    }
+
+    return sock;
+}
+
+void send_rpc_call(int sockfd, const char* command, const char* info) {
+    char buffer[1024] = {0};
+    snprintf(buffer, sizeof(buffer), "%s %s\n", command, info);
+    send(sockfd, buffer, strlen(buffer), 0);
+}
+
+void receive_response(int sockfd) {
+    char buffer[1024] = {0};
+    read(sockfd, buffer, 1024);
+    printf("Response from paddock: %s\n", buffer);
+}
+
+int main(int argc, char const *argv[]) {
+    char command[MAX_LEN];
+    char info[MAX_LEN];
+
+    while (1){
+    int sockfd = establish_connection();
+
+    printf("Command: ");
+    fgets(command, sizeof(command), stdin);
+
+    printf("Info : ");
+    fgets(info, sizeof(info), stdin);
+
+    send_rpc_call(sockfd, command, info);
+    receive_response(sockfd);
+    }
+
+    return 0;
+}
+```
+driver.c bertanggung jawab untuk mengirim permintaan ke paddock melalui koneksi RPC. Setelah mengirim permintaan, program akan menunggu dan mencetak balasan dari paddock.
+
+```c
+void send_rpc_call(int sockfd, const char* command, const char* info) {
+    char buffer[1024] = {0};
+    snprintf(buffer, sizeof(buffer), "%s %s\n", command, info);
+    send(sockfd, buffer, strlen(buffer), 0);
+}
+```
+function `send_rpc_call` digunakan untuk mengirim pesan ke paddock. `sprints` akan menyimpan char command dan info menjadi satu di char buffer. 
+
+**paddock.c**
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <signal.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <syslog.h>
+#include <time.h>
+#include "action.h"
+
+#define PORT 8080
+
+void log_message(const char* source, const char* command, const char* additional_info) {
+    time_t rawtime;
+    struct tm *info;
+    char timestamp[80];
+
+    time(&rawtime);
+    info = localtime(&rawtime);
+
+    strftime(timestamp, 80, "%d/%m/%Y %H:%M:%S", info);
+
+    FILE *fp = fopen("/home/kali/sisoptest/modul3/race.log", "a");
+    if (fp == NULL) {
+        perror("Failed to open log file");
+        return;
+    }
+
+    fprintf(fp, "[%s] [%s]: [%s] [%s]\n", source, timestamp, command, additional_info);
+    fclose(fp);
+}
+
+void handle_rpc_call(int new_socket) {
+    char buffer[1024] = {0};
+    read(new_socket, buffer, 1024);
+
+    char command[50];
+    char info[50];
+
+    sscanf(buffer, "%s %s", command, info);
+    log_message("Driver", command, info);
+
+    char response[1024] = {0};
+
+    if (strcmp(command, "Gap") == 0) {
+        float distance = atof(info);
+        strcpy(response, handle_gap(distance));
+    } else if (strcmp(command, "Fuel") == 0) {
+        int fuel = atoi(info);
+       strcpy(response, handle_fuel(fuel));
+    } else if (strcmp(command, "Tire") == 0) {
+        int tire_wear = atoi(info);
+        strcpy(response, handle_tire(tire_wear));
+    } else if (strcmp(command, "TireChange") == 0) {
+        strcpy(response, handle_tire_change(info));
+    } else {
+        strcpy(response, "Invalid command");
+    }
+
+    send(new_socket, response, strlen(response), 0);
+    log_message("Paddock", command, response);
+
+    close(new_socket);
+}
+
+static void skeleton_daemon()
+{
+    pid_t pid, sid;
+    pid = fork();
+
+    if (pid < 0)
+    {
+        perror("Fork failed");
+        return;
+    }
+
+    if (pid > 0)
+    {
+        exit(EXIT_SUCCESS);
+    }
+
+    umask(0);
+
+    sid = setsid();
+    if (sid < 0)
+    {
+        perror("SID failed");
+        return;
+    }
+
+    if ((chdir("/")) < 0)
+    {
+        perror("Chdir failed");
+        return;
+    }
+
+    close(STDIN_FILENO);
+    close(STDOUT_FILENO);
+    close(STDERR_FILENO);
+
+    openlog("paddock", LOG_PID, LOG_DAEMON);
+    syslog(LOG_NOTICE, "paddock started");
+}
+
+int main() {
+    skeleton_daemon();
+
+    int server_fd, new_socket;
+    struct sockaddr_in address;
+    int opt = 1;
+    int addrlen = sizeof(address);
+
+    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
+        perror("Socket failed");
+        return 1;
+    }
+
+    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt))) {
+        perror("Setsockopt failed");
+        return 1;
+    }
+
+    address.sin_family = AF_INET;
+    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_port = htons(PORT);
+
+    if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
+        perror("Bind failed");
+    }
+
+    if (listen(server_fd, 3) < 0) {
+        perror("Listen failed");
+    }
+
+    while (1) {
+    if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0) {
+        perror("Accept failed");
+        continue;
+    }
+
+        handle_rpc_call(new_socket);
+    }
+
+    syslog (LOG_NOTICE, "Paddock terminated.");
+    closelog();
+    
+    return EXIT_SUCCESS;
+}
+```
+paddock.c menerima permintaan dari pengemudi, memprosesnya, dan mengirimkan respons kembali kepada pengemudi. Program ini juga berfungsi sebagai daemon, berarti ia berjalan sebagai layanan latar belakang yang berkelanjutan.
+
+<ul>
+<li>`#include "action.h"` juga digunakan sebagai header file agar paddock bisa memanggil function dari actions.c. 
+
+<li>`void log_message` digunakan untuk melakukan log percakapan ke race.log. log_message akan melakukan log command dari driver dengan `log_message("Driver", command, info);`. Kemudian setelah responces telah terisi `log_message` dipanggil kembali untuk melakukan log command dan response yang diberikan paddock `log_message("Paddock", command, response);`
+</ul>
+
+>Screenshots:
+
+
 
 ## Soal 4
+
+Pengerjaan soal 4 masih terkendala dan belum berhasil pada kebanyakan fungsinya. client dan server berhasil terhubung namun server belum bisa melakukan response.
+
+**client.c**
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+#define PORT 8080
+
+int main(int argc, char const *argv[]) {
+    struct sockaddr_in address;
+    int sock = 0, valread;
+    struct sockaddr_in serv_addr;
+    char *hello = "Hello from client";
+    char buffer[1024] = {0};
+
+    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+        printf("\n Socket creation error \n");
+        return -1;
+    }
+
+    memset(&serv_addr, '0', sizeof(serv_addr));
+
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_port = htons(PORT);
+
+    if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
+        printf("\nInvalid address/ Address not supported \n");
+        return -1;
+    }
+
+    if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
+        printf("\nConnection Failed \n");
+        return -1;
+    }
+
+    send(sock, hello, strlen(hello), 0);
+    printf("Hello message sent\n");
+
+    while (1) {
+        printf("Enter a command: ");
+        fgets(buffer, sizeof(buffer), stdin);
+
+        send(sock, buffer, strlen(buffer), 0);
+
+        valread = read(sock, buffer, 1024);
+        printf("Server response: %s\n", buffer);
+    }
+
+    return 0;
+}
+```
+
+**server.c**
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <time.h>
+
+#define MAX_LINE_LENGTH 255
+#define PORT 8080
+
+void send_message(int sockfd, const char *message) {
+    send(sockfd, message, strlen(message), 0);
+}
+
+void show(char *options, int sockfd) {
+    FILE *list = fopen("myanimelist.csv", "r");
+    char line[MAX_LINE_LENGTH];
+
+    if (list == NULL) {
+        perror("Error opening file");
+        send_message(sockfd, "Error opening file\n");
+        return;
+    }
+
+    while (fgets(line, sizeof(line), list) != NULL) {
+        send_message(sockfd, line);
+    }
+
+    fclose(list);
+}
+
+void add_row(char *options, int sockfd) {
+    FILE *list = fopen("myanimelist.csv", "a");
+    char type [5] = "ADD";
+    if (list == NULL) {
+        perror("Error opening file");
+        send_message(sockfd, "Error opening file\n");
+        return;
+    }
+
+    fprintf(list, "%s\n", options);
+    change_log(type, options);
+    fclose(list);
+    send_message(sockfd, "Row added successfully.\n");
+}
+
+void search_row(char *options, int sockfd) {
+    FILE *list = fopen("myanimelist.csv", "r");
+    char line[MAX_LINE_LENGTH];
+    int found = 0;
+    int row_number = 0;
+    char *token;
+
+    if (list == NULL) {
+        perror("Error opening file");
+        send_message(sockfd, "Error opening file\n");
+        return;
+    }
+
+    char title[MAX_LINE_LENGTH];
+    sscanf(options, "%[^\n]", title);
+
+    while (fgets(line, sizeof(line), list) != NULL) {
+        row_number++;
+        int column_number = 0;
+        char *field[MAX_LINE_LENGTH];
+
+        token = strtok(line, ",");
+        while (token != NULL && column_number <= 4){
+            field[column_number++] = token;
+            token = strtok(NULL, ",");
+        }
+
+        if (column_number == 2 && strcmp(field[2], title) == 0){
+            found = 1;
+            send_message(sockfd, line);
+        }
+        
+    }
+
+    fclose(list);
+
+    if (!found) {
+        send_message(sockfd, "Row not found.\n");
+    }
+}
+
+void status_search(char *options, int sockfd) {
+    FILE *list = fopen("myanimelist.csv", "r");
+    char line[MAX_LINE_LENGTH];
+    int found = 0;
+
+    if (list == NULL) {
+        perror("Error opening file");
+        send_message(sockfd, "Error opening file\n");
+        return;
+    }
+
+    char title[MAX_LINE_LENGTH];
+    sscanf(options, "%[^\n]", title);
+
+    while (fgets(line, sizeof(line), list) != NULL) {
+        if (strstr(line, title) != NULL) {
+            found = 1;
+            send_message(sockfd, line);
+        }
+    }
+
+    fclose(list);
+
+    if (!found) {
+        send_message(sockfd, "Row not found.\n");
+    }
+}
+
+void delete_row(char *options, int sockfd) {
+    FILE *list = fopen("myanimelist.csv", "r");
+    FILE *temp = fopen("temp.csv", "w");
+    char line[MAX_LINE_LENGTH];
+    char type[5] = "DEL";
+
+    if (list == NULL || temp == NULL) {
+        perror("Error opening file");
+        send_message(sockfd, "Error opening file\n");
+        return;
+    }
+
+    int found = 0;
+    while (fgets(line, sizeof(line), list) != NULL) {
+        if (strstr(line, options) != NULL) {
+            found = 1;
+            continue;
+        }
+        fprintf(temp, "%s", line);
+    }
+
+    fclose(list);
+    fclose(temp);
+
+    if (found) {
+        remove("myanimelist.csv");
+        rename("temp.csv", "myanimelist.csv");
+        change_log(type, options);
+        send_message(sockfd, "Row deleted successfully.\n");
+    } else {
+        remove("temp.csv");
+        send_message(sockfd, "Row not found.\n");
+    }
+}
+
+void change_log(char *type, char *changes){
+    FILE *log = fopen("change.log", "a");
+    time_t currentDate;
+    struct tm *localTime;
+
+    time(&currentDate);
+    localTime = localtime(&currentDate);
+
+    char dateFormat[9];
+    strftime(dateFormat, sizeof(dateFormat), "%d,%m,%y", localtime);
+    
+
+    fprinf(log, "[%s] [%s] [%s]", dateFormat, type, changes);
+
+    fclose(log);
+}
+
+void handle_command(char *command, int sockfd) {
+    char input[MAX_LINE_LENGTH];
+    strcpy(input, command);
+    int i;
+
+    char options[MAX_LINE_LENGTH];
+    char cmd[MAX_LINE_LENGTH];
+    sscanf(input, "%s %[^\n]", cmd, options);
+
+    // char *cmd = strtok(input, " ");
+    // int len = strlen(input);
+
+    // for (i = 0; i < len; i++){
+    //     if (input[i] == ' '){
+    //         break;
+    //     }
+    // }
+
+    // for (int j = 0; j < len - i; j++){
+    //     input[j] = input[j + i + 1];
+    // }
+    
+    // input[len - i] = '\0';
+    // strcpy(options, input);
+
+    if (strcmp(cmd, "show") == 0) {
+        show(options, sockfd);
+    } else if (strcmp(cmd, "exit") == 0) {
+        send_message(sockfd, "Exiting\n");
+        exit(EXIT_SUCCESS);
+    } else if (strcmp(cmd, "add") == 0) {
+        add_row(options, sockfd);
+    } else if (strcmp(cmd, "search") == 0) {
+        search_row(options, sockfd);
+    } else if (strcmp(cmd, "delete") == 0) {
+        delete_row(options, sockfd);
+    } else if (strcmp(cmd, "status") == 0) {
+        status_search(options, sockfd);
+    }
+    else {
+        send_message(sockfd, "Invalid command\n");
+    }
+}
+
+int main() {
+    int server_fd, new_socket, valread;
+    struct sockaddr_in address;
+    int opt = 1;
+    int addrlen = sizeof(address);
+
+    char buffer[1024] = {0};
+    char *hello = "Connection established\n";
+
+    if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
+        perror("socket failed");
+        exit(EXIT_FAILURE);
+    }
+
+    if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt))) {
+        perror("setsockopt");
+        exit(EXIT_FAILURE);
+    }
+
+    address.sin_family = AF_INET;
+    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_port = htons(PORT);
+
+    if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
+        perror("bind failed");
+        exit(EXIT_FAILURE);
+    }
+
+    if (listen(server_fd, 3) < 0) {
+        perror("listen");
+        exit(EXIT_FAILURE);
+    }
+
+    if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t *)&addrlen)) < 0) {
+        perror("accept");
+        exit(EXIT_FAILURE);
+    }
+
+    send(new_socket, hello, strlen(hello), 0);
+
+    while (1) {
+        valread = read(new_socket, buffer, 1024);
+        printf("Client: %s\n", buffer);
+        handle_command(buffer, new_socket);
+    }
+
+    return 0;
+}
+```
