@@ -138,10 +138,15 @@ Info: 55%
 Contoh direktori 😶‍🌫️:
 .		.
 ├── client
+
 │   └── driver.c
+
 └── server
+
     ├── actions.c
+    
     ├── paddock.c
+    
     └── race.log
 
 ## Soal 4
@@ -172,11 +177,17 @@ Koneksi antara client dan server tidak akan terputus jika ada kesalahan input da
 Hasil akhir:
 
 soal_4/
+
     ├── change.log
+    
     ├── client/
+    
     │   └── client.c
+    
     ├── myanimelist.csv
+    
     └── server/
+    
         └── server.c
 Log Perubahan:
 5/3/2024 - 2:37 pm: Tambah keterangan soal 3 di poin H 
