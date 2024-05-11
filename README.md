@@ -7,75 +7,42 @@
 
 # Soal
 ## Soal 1
-
 Pada zaman dahulu pada galaksi yang jauh-jauh sekali, hiduplah seorang Stelle. Stelle adalah seseorang yang sangat tertarik dengan Tempat Sampah dan Parkiran Luar Angkasa. Stelle memulai untuk mencari Tempat Sampah dan Parkiran yang terbaik di angkasa. Dia memerlukan program untuk bisa secara otomatis mengetahui Tempat Sampah dan Parkiran dengan rating terbaik di angkasa. Programnya berbentuk microservice sebagai berikut:
-Dalam auth.c pastikan file yang masuk ke folder new-entry adalah file csv dan berakhiran  trashcan dan parkinglot. Jika bukan, program akan secara langsung akan delete file tersebut. 
-Contoh dari nama file yang akan diautentikasi:
-belobog_trashcan.csv
-osaka_parkinglot.csv
-Format data (Kolom)  yang berada dalam file csv adalah seperti berikut:
+Dalam auth.c pastikan file yang masuk ke folder new-entry adalah file csv dan berakhiran trashcan dan parkinglot. Jika bukan, program akan secara langsung akan delete file tersebut. Contoh dari nama file yang akan diautentikasi: belobog_trashcan.csv osaka_parkinglot.csv
+Format data (Kolom) yang berada dalam file csv adalah seperti berikut:
 
-![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/89a776b1-4bd6-4874-90bb-cae686da57e0)
+![Screenshot (504)](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/153620793/ccad326c-de19-47f2-afcd-e207c7887a85)
 
-atau
+File csv yang lolos tahap autentikasi akan dikirim ke shared memory. Dalam rate.c, proses akan mengambil data csv dari shared memory dan akan
+memberikan output Tempat Sampah dan Parkiran dengan Rating Terbaik dari data tersebut. 
 
-![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/b258017e-5030-4b89-91b7-b4d9b053b1c8)
+![Screenshot (505)](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/153620793/5e24283a-8737-4a0f-93b0-ccc01488d930)
 
-
-File csv yang lolos tahap autentikasi akan dikirim ke shared memory. 
-Dalam rate.c, proses akan mengambil data csv dari shared memory dan akan memberikan output Tempat Sampah dan Parkiran dengan Rating Terbaik dari data tersebut.
-
-![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/f6c2183a-1ccd-4fe0-aa35-91da6c2a6814)
-
-
-Pada db.c, proses bisa memindahkan file dari new-data ke folder microservices/database, WAJIB MENGGUNAKAN SHARED MEMORY.
-Log semua file yang masuk ke folder microservices/database ke dalam file db.log dengan contoh format sebagai berikut:
-[DD/MM/YY hh:mm:ss] [type] [filename]
-ex : `[07/04/2024 08:34:50] [Trash Can] [belobog_trashcan.csv]
-
+Pada db.c, proses bisa memindahkan file dari new-data ke folder microservices/database, WAJIB MENGGUNAKAN SHARED MEMORY. Log semua file yang masuk ke folder microservices/database ke dalam file
+db.log dengan contoh format sebagai berikut: [DD/MM/YY hh:mm:ss] [type] [filename] ex : `[07/04/2024 08:34:50] [Trash Can] [belobog_trashcan.csv]
 Contoh direktori awal:
 .
-
-	├── auth.c
-	
-	├── microservices
-	
-	│   ├── database
-	
-	│   │   └── db.log
-	
-	│   ├── db.c
-	
-	│   └── rate.c
-	
-	└── new-data
-	
-	├── belobog_trashcan.csv
-	    
-	├── ikn.csv
-	    
-	└── osaka_parkinglot.csv
-
+├── auth.c
+├── microservices
+│ ├── database
+│ │ └── db.log
+│ ├── db.c
+│ └── rate.c
+└── new-data
+ ├── belobog_trashcan.csv
+ ├── ikn.csv
+ └── osaka_parkinglot.csv
 Contoh direktori akhir setelah dijalankan auth.c dan db.c:
 .
-	├── auth.c
-	
-	├── microservices
-	
-	│   ├── database
-	
-	│   │   ├── belobog_trashcan.csv
-	
-	│   │   ├── db.log
-	
-	│   │   └── osaka_parkinglot.csv
-	
-	│   ├── db.c
-	
-	│   └── rate.c
-	
-	└── new-data
-
+├── auth.c
+├── microservices
+│ ├── database
+│ │ ├── belobog_trashcan.csv
+│ │ ├── db.log
+│ │ └── osaka_parkinglot.csv
+│ ├── db.c
+│ └── rate.c
+└── new-data
 
 ## Soal 2
 Max Verstappen 🏎️ seorang pembalap F1 dan programer memiliki seorang adik bernama Min Verstappen (masih SD) sedang menghadapi tahap paling kelam dalam kehidupan yaitu perkalian matematika, Min meminta bantuan Max untuk membuat kalkulator perkalian sederhana (satu sampai sembilan). Sembari Max nguli dia menyuruh Min untuk belajar perkalian dari web (referensi) agar tidak bergantung pada kalkulator.
@@ -138,18 +105,12 @@ Info: 55%
 
 Contoh direktori 😶‍🌫️:
 .		.
-
-	├── client
-	
-	│   └── driver.c
-	
-	└── server
-	
-	├── actions.c
-	    
-	├── paddock.c
-	    
-	└── race.log
+├── client
+│   └── driver.c
+└── server
+    ├── actions.c
+    ├── paddock.c
+    └── race.log
 
 ## Soal 4
 Lewis Hamilton 🏎 seorang wibu akut dan sering melewatkan beberapa episode yang karena sibuk menjadi asisten. Maka dari itu dia membuat list anime yang sedang ongoing (biar tidak lupa) dan yang completed (anime lama tapi pengen ditonton aja). Tapi setelah Lewis pikir-pikir malah kepikiran untuk membuat list anime. Jadi dia membuat file (harap diunduh) dan ingin menggunakan socket yang baru saja dipelajarinya untuk melakukan CRUD pada list animenya. 
@@ -179,18 +140,12 @@ Koneksi antara client dan server tidak akan terputus jika ada kesalahan input da
 Hasil akhir:
 
 soal_4/
-
     ├── change.log
-    
     ├── client/
-    
     │   └── client.c
-    
     ├── myanimelist.csv
-    
     └── server/
-    
-	└── server.c
+        └── server.c
 Log Perubahan:
 5/3/2024 - 2:37 pm: Tambah keterangan soal 3 di poin H 
 5/3/2024 - 6.18 pm: Ralat “dan” pada poin D soal 1
@@ -199,8 +154,203 @@ Log Perubahan:
 # Penyelesaian
 
 ## Soal 1
+pengerjaan nomor 1 masih bermasalah. auth.c berfungsi berhasil membaca file. Rate.c tidak berhasil membaca data dari shared memory dengan benar
+output Filename: kosong dan nilai Rating: 0.0
+**auth.c**
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/shm.h>
+#include <sys/stat.h>
+#include <dirent.h>
+#include <unistd.h>
 
+#define SHM_KEY 0x1234
 
+int main() {
+    char *shm;
+    int shm_id, file_size;
+    FILE *fp;
+    char filename[1024], buffer[1024], output[1024], output_buffer[2048];
+//    output[0] = '\0';
+
+    // Membuat shared memory
+    shm_id = shmget(SHM_KEY, 1024, IPC_CREAT | 0666);
+    shm = shmat(shm_id, NULL, 0);
+//    filename_shm = shm_addr;  // Menunjuk ke awal shared memory untuk menyimpan nama file
+
+    // Membaca file dari new-data
+    DIR *dir = opendir("new-data");
+    struct dirent *entry;
+    while ((entry = readdir(dir)) != NULL) {
+        if (entry->d_type == DT_REG) {
+            snprintf(filename, sizeof(filename), "new-data/%s", entry->d_name);
+            if (strstr(filename, "trashcan.csv") || strstr(filename, "parkinglot.csv")) {
+//		printf("%s\n", entry->d_name);
+//		strcpy(shm_addr, entry->d_name);
+//		printf("%s\n", shm_addr);
+                fp = fopen(filename, "r");
+                if (fp == NULL) {
+                    printf("Gagal membuka file: %s\n", filename);
+                    continue;
+                }
+		// Menyalin nama file ke shared memory
+//                strcpy(filename_shm, entry->d_name);
+//                filename_shm += strlen(entry->d_name) + 1;  // Memindahkan pointer ke lokasi selanjutnya
+//		printf("%s\n", filename_shm);
+                // Membaca isi file dan mengirim ke shared memory
+//		strcpy(shm_addr, filename);
+                file_size = fread(buffer, sizeof(char), 1024, fp);
+                memcpy(output, buffer, file_size);
+                output[file_size] = '\0';
+		sprintf(output_buffer, "%s\n%s\n", entry->d_name, output);;
+		strcat(shm, output_buffer);
+//		printf("%s", shm);
+                fclose(fp);
+            } else {
+                // Menghapus file yang tidak valid
+                remove(filename);
+            }
+        }
+    }
+    closedir(dir);
+
+    // Melepaskan shared memory
+    printf("%s", shm);
+    shmdt(shm);
+    shmctl(shm_id, IPC_RMID, NULL);
+
+    return 0;
+}
+```
+auth.c memproses file-file yang dimasukkan ke dalam direktori new-data, memeriksa apakah mereka merupakan file CSV dengan nama yang sesuai, dan menyimpan data dari file-file yang valid ke dalam shared memory. Memeriksa apakah nama file sesuai dengan pola yang diinginkan (berakhiran "trashcan.csv" atau "parkinglot.csv"). Jika sesuai, membuka file tersebut, membaca isinya, dan mengirimkan isinya ke shared memory.
+
+![Screenshot (507)](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/153620793/cccbfa01-c214-4363-9889-969d6027ccde)
+
+**rate.c**
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/shm.h>
+
+#define SHM_KEY 0x1234
+
+int main() {
+    char *shm_addr;
+    int shm_id;
+    float highest_trash = 0.0, highest_parking = 0.0;
+    char trash_name[100], parking_name[100], current_file[100];
+
+    shm_id = shmget(SHM_KEY, 1024, IPC_CREAT | 0666);
+    shm_addr = shmat(shm_id, NULL, 0);
+
+    char *line = strtok(shm_addr, "\n");
+    while (line != NULL) {
+    
+        if (strstr(line, ".csv") != NULL) {
+            strcpy(current_file, line);
+        } else {
+            
+            char name[100];
+            float rating;
+            sscanf(line, "%[^,], %f", name, &rating);
+
+            if (strstr(current_file, "trashcan.csv") != NULL && rating > highest_trash) {
+                highest_trash = rating;
+                strcpy(trash_name, name);
+            } else if (strstr(current_file, "parkinglot.csv") != NULL && rating > highest_parking) {
+                highest_parking = rating;
+                strcpy(parking_name, name);
+            }
+        }
+
+        line = strtok(NULL, "\n");
+    }
+
+    printf("Output:\n\n");
+    printf("Type: Trash Can\nFilename: %s\nName: %s\nRating: %.1f\n\n", current_file, trash_name, highest_trash);
+    printf("Type: Parking Lot\nFilename: %s\nName: %s\nRating: %.1f\n", current_file, parking_name, highest_parking);
+
+    shmdt(shm_addr);
+    shmctl(shm_id, IPC_RMID, NULL);
+
+    return 0;
+}
+```
+rate.c menganalisis data dari shared memory dan menentukan tempat sampah dan parkiran dengan rating tertinggi. Membandingkan rating dari setiap tempat sampah dan parkiran. Memilih tempat sampah dan parkiran dengan rating tertinggi. Mencetak hasil pemilihan tempat sampah dan parkiran ke layar.
+![Screenshot (506)](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/153620793/4b938057-b275-4638-87c8-bcd1f82c102e)
+
+**db.c**
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/shm.h>
+#include <sys/stat.h>
+#include <time.h>
+#include <unistd.h>
+
+#define SHM_KEY 0x1234
+
+int main() {
+    char *shm_addr;
+    int shm_id;
+    FILE *fp, *logfile;
+    char filename[100], logline[200];
+    time_t rawtime;
+    struct tm *timeinfo;
+
+    // Membuat folder database jika belum ada
+    mkdir("microservices/database", 0755);
+
+    // Membuka file log
+    logfile = fopen("microservices/database/db.log", "a");
+    if (logfile == NULL) {
+        printf("Gagal membuka file log\n");
+        return 1;
+    }
+
+    // Mengakses shared memory
+    shm_id = shmget(SHM_KEY, 1024, 0666);
+    shm_addr = shmat(shm_id, NULL, 0);
+
+    char *line = strtok(shm_addr, "\n");
+    while (line != NULL) {
+        char name[100], type[20];
+        sscanf(line, "%[^,],%s", name, type);
+
+        sprintf(filename, "microservices/database/%s.csv", name);
+        fp = fopen(filename, "w");
+        if (fp == NULL) {
+            printf("Gagal membuat file: %s\n", filename);
+            line = strtok(NULL, "\n");
+            continue;
+        }
+
+        fprintf(fp, "%s\n", line);
+        fclose(fp);
+
+        // Mencatat log
+        time(&rawtime);
+        timeinfo = localtime(&rawtime);
+        strftime(logline, sizeof(logline), "[%d/%m/%Y %H:%M:%S] [%s] [%s.csv]", timeinfo, type, name);
+        fprintf(logfile, "%s\n", logline);
+
+        line = strtok(NULL, "\n");
+    }
+
+    fclose(logfile);
+
+    // Melepaskan shared memory
+    shmdt(shm_addr);
+    shmctl(shm_id, IPC_RMID, NULL);
+
+    return 0;
+}
+```
+db.c memindahkan file-file yang valid dari direktori new-data ke dalam direktori microservices/database dan mencatatnya di file log.
 
 ## soal 2
 Kita masukkan beberapa header sebagai library yang dipakai. Untuk penjelasan kegunaan tiap library, ada pada komentar.
