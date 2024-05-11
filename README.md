@@ -35,45 +35,46 @@ ex : `[07/04/2024 08:34:50] [Trash Can] [belobog_trashcan.csv]
 
 Contoh direktori awal:
 .
-├── auth.c
 
-├── microservices
-
-│   ├── database
-
-│   │   └── db.log
-
-│   ├── db.c
-
-│   └── rate.c
-
-└── new-data
-
-    ├── belobog_trashcan.csv
-    
-    ├── ikn.csv
-    
-    └── osaka_parkinglot.csv
+	├── auth.c
+	
+	├── microservices
+	
+	│   ├── database
+	
+	│   │   └── db.log
+	
+	│   ├── db.c
+	
+	│   └── rate.c
+	
+	└── new-data
+	
+	├── belobog_trashcan.csv
+	    
+	├── ikn.csv
+	    
+	└── osaka_parkinglot.csv
 
 Contoh direktori akhir setelah dijalankan auth.c dan db.c:
 .
-├── auth.c
-
-├── microservices
-
-│   ├── database
-
-│   │   ├── belobog_trashcan.csv
-
-│   │   ├── db.log
-
-│   │   └── osaka_parkinglot.csv
-
-│   ├── db.c
-
-│   └── rate.c
-
-└── new-data
+	├── auth.c
+	
+	├── microservices
+	
+	│   ├── database
+	
+	│   │   ├── belobog_trashcan.csv
+	
+	│   │   ├── db.log
+	
+	│   │   └── osaka_parkinglot.csv
+	
+	│   ├── db.c
+	
+	│   └── rate.c
+	
+	└── new-data
 
 
 ## Soal 2
@@ -137,17 +138,18 @@ Info: 55%
 
 Contoh direktori 😶‍🌫️:
 .		.
-├── client
 
-│   └── driver.c
-
-└── server
-
-    ├── actions.c
-    
-    ├── paddock.c
-    
-    └── race.log
+	├── client
+	
+	│   └── driver.c
+	
+	└── server
+	
+	├── actions.c
+	    
+	├── paddock.c
+	    
+	└── race.log
 
 ## Soal 4
 Lewis Hamilton 🏎 seorang wibu akut dan sering melewatkan beberapa episode yang karena sibuk menjadi asisten. Maka dari itu dia membuat list anime yang sedang ongoing (biar tidak lupa) dan yang completed (anime lama tapi pengen ditonton aja). Tapi setelah Lewis pikir-pikir malah kepikiran untuk membuat list anime. Jadi dia membuat file (harap diunduh) dan ingin menggunakan socket yang baru saja dipelajarinya untuk melakukan CRUD pada list animenya. 
@@ -188,7 +190,7 @@ soal_4/
     
     └── server/
     
-        └── server.c
+	└── server.c
 Log Perubahan:
 5/3/2024 - 2:37 pm: Tambah keterangan soal 3 di poin H 
 5/3/2024 - 6.18 pm: Ralat “dan” pada poin D soal 1
