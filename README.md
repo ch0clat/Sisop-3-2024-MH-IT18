@@ -829,8 +829,34 @@ paddock.c menerima permintaan dari pengemudi, memprosesnya, dan mengirimkan resp
 </ul>
 
 >Screenshots:
+>
+>![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/a2f4d1e4-2afa-414f-8bdc-6a98adda023a)
+>
+>COMMANDS
+>
+>![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/c7a05290-6105-4732-9493-0807423e1db3)
+>
+>![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/0372965b-ccf2-4e03-8247-8108aa75776e)
+>
+>![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/d512e10a-674b-4d29-b608-ee6de4219b2a)
+>
+>![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/ae4afdcb-da97-46bd-b872-bd169e110e86)
+>
+>![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/7b863528-3fcf-4ea1-b3d6-cc4e0533789b)
+>
+>ERROR HANDLING
+>
+>![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/b2849f88-0c88-447f-8a3d-d89294b64676)
+>
+>RACE.LOG
+>
+>![image](https://github.com/ch0clat/Sisop-3-2024-MH-IT18/assets/128571877/31d03428-2c11-469f-bb44-c31bf18c9864)
 
+### Revisi Soal 3
 
+<ul>
+<li>Menambahkan header `#include "action.h"` dari actions.c agar paddock dapat mengakses functions di dalam actions.c.
+</ul>
 
 ## Soal 4
 
