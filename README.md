@@ -105,12 +105,18 @@ Info: 55%
 
 Contoh direktori 😶‍🌫️:
 .		.
-├── client
-│   └── driver.c
-└── server
-    ├── actions.c
-    ├── paddock.c
-    └── race.log
+
+	├── client
+		
+	│   └── driver.c
+		
+	└── server
+	
+	├── actions.c
+		    
+	├── paddock.c
+		    
+	└── race.log
 
 ## Soal 4
 Lewis Hamilton 🏎 seorang wibu akut dan sering melewatkan beberapa episode yang karena sibuk menjadi asisten. Maka dari itu dia membuat list anime yang sedang ongoing (biar tidak lupa) dan yang completed (anime lama tapi pengen ditonton aja). Tapi setelah Lewis pikir-pikir malah kepikiran untuk membuat list anime. Jadi dia membuat file (harap diunduh) dan ingin menggunakan socket yang baru saja dipelajarinya untuk melakukan CRUD pada list animenya. 
@@ -140,12 +146,19 @@ Koneksi antara client dan server tidak akan terputus jika ada kesalahan input da
 Hasil akhir:
 
 soal_4/
+
     ├── change.log
+    
     ├── client/
+    
     │   └── client.c
+    
     ├── myanimelist.csv
+    
     └── server/
+    
         └── server.c
+	
 Log Perubahan:
 5/3/2024 - 2:37 pm: Tambah keterangan soal 3 di poin H 
 5/3/2024 - 6.18 pm: Ralat “dan” pada poin D soal 1
