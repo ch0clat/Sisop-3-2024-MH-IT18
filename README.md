@@ -571,12 +571,12 @@ char* handle_tire_change(char* current_tire) {
 }
 ```
 
-actions.c berisi function yang bisa di panggil oleh paddock.c. `#include "action.h"` digunakan sebagai header file agar paddock dapat memanggil function pada action.c.
+actions.c berisi function yang bisa di panggil oleh paddock.c. ``#include "action.h"`` digunakan sebagai header file agar paddock dapat memanggil function pada action.c.
 <ul>
-<li> `handle_gap` akan di panggil jika driver menggunakan command `Gap`
-<li> `handle_fuel` akan di panggil jika driver menggunakan command `Fuel`
-<li> `handle_tire` akan di panggil jika driver menggunakan command `Tire`
-<li> `handle_tire_change` akan di panggil jika driver menggunakan command `TireChange`
+<li> ``handle_gap`` akan di panggil jika driver menggunakan command ``Gap``
+<li> ``handle_fuel`` akan di panggil jika driver menggunakan command ``Fuel``
+<li> ``handle_tire`` akan di panggil jika driver menggunakan command ``Tire``
+<li> ``handle_tire_change`` akan di panggil jika driver menggunakan command ``TireChange``
 </ul>
 
 
@@ -823,9 +823,9 @@ int main() {
 paddock.c menerima permintaan dari pengemudi, memprosesnya, dan mengirimkan respons kembali kepada pengemudi. Program ini juga berfungsi sebagai daemon, berarti ia berjalan sebagai layanan latar belakang yang berkelanjutan.
 
 <ul>
-<li>`#include "action.h"` juga digunakan sebagai header file agar paddock bisa memanggil function dari actions.c. 
+<li>``#include "action.h"`` juga digunakan sebagai header file agar paddock bisa memanggil function dari actions.c. 
 
-<li>`void log_message` digunakan untuk melakukan log percakapan ke race.log. log_message akan melakukan log command dari driver dengan `log_message("Driver", command, info);`. Kemudian setelah responces telah terisi `log_message` dipanggil kembali untuk melakukan log command dan response yang diberikan paddock `log_message("Paddock", command, response);`
+<li>``void log_message`` digunakan untuk melakukan log percakapan ke race.log. log_message akan melakukan log command dari driver dengan ``log_message("Driver", command, info);``. Kemudian setelah responces telah terisi ``log_message`` dipanggil kembali untuk melakukan log command dan response yang diberikan paddock ``log_message("Paddock", command, response);``
 </ul>
 
 >Screenshots:
@@ -855,7 +855,7 @@ paddock.c menerima permintaan dari pengemudi, memprosesnya, dan mengirimkan resp
 ### Revisi Soal 3
 
 <ul>
-<li>Menambahkan header `#include "action.h"` dari actions.c agar paddock dapat mengakses functions di dalam actions.c.
+<li>Menambahkan header ``#include "action.h"`` dari actions.c agar paddock dapat mengakses functions di dalam actions.c.
 </ul>
 
 ## Soal 4
