@@ -5,9 +5,11 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <time.h>
 
 #define PORT 8080
-#define MAX_LEN 10
+#define MAX_LEN 20
+
 
 int establish_connection() {
     int sock = 0;
@@ -49,11 +51,12 @@ void receive_response(int sockfd) {
 }
 
 int main(int argc, char const *argv[]) {
-    int sockfd = establish_connection();
     char command[MAX_LEN];
     char info[MAX_LEN];
 
     while (1){
+    int sockfd = establish_connection();
+
     printf("Command: ");
     fgets(command, sizeof(command), stdin);
 
